@@ -1,10 +1,25 @@
 import { Box, Image} from '@chakra-ui/react'
+import axios from 'axios'
+import { useEffect } from 'react'
 import CircleIcon from '../components/CircleIcon'
 
 const Cards = ({some}) => {
 
-   const {name, status, image, species, origin} = some
+   const {name, status, image, species, location, episode} = some
    let getColor = ''
+    
+    useEffect(()=>{
+        const bringEpisode = async () => {
+           try {
+                const urlEpisode = await episode
+                const episodeName = await axios(urlEpisode)
+                console.log(await episodeName)
+           } catch (error) {
+               console.log(error)
+           }
+        }
+        bringEpisode()
+    },[episode])
 
     switch(status){
         case 'Alive':
@@ -33,7 +48,7 @@ const Cards = ({some}) => {
                         mt='1'
                         fontWeight='bold'
                         lineHeight='8'
-                        className={`text-zinc-50 ${name.length < 15 ? 'text-4xl' : 'text-2xl'}`}
+                        className={`text-zinc-50 ${name.length < 15 ? 'text-4xl' : 'text-2xl'} hover:text-orange-500 cursor-pointer`}
                     >
                             {name}
                     </Box>
@@ -44,13 +59,20 @@ const Cards = ({some}) => {
                         mt='4'
                     >   
                     <CircleIcon color={getColor} boxSize={3}/>
-                    {` ${status} - ${species}`}
+                   {' '} {status} - {species}
                     </Box>
                     <Box
                         color='gray.400'
+                        fontWeight='semibold'
                         mt='4'
                     >
-                        {`Origin: ${origin.name}`}
+                        Last known location:
+                    </Box>
+                    <Box
+                        mt='1'
+                        color='gray.100'
+                    >
+                        {location.name}
                     </Box>
                 </div>
             </Box> 

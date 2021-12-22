@@ -8,10 +8,10 @@ function App() {
   return (
     <CharacterProvider>
       <ChakraProvider>
-        
+          <div className='bg-zinc-500 h-screen'>
             <Nav />
             <Page />
-        
+          </div>
       </ChakraProvider>
     </CharacterProvider>
   )
