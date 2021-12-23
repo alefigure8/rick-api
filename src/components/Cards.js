@@ -1,26 +1,12 @@
 import { Box, Image} from '@chakra-ui/react'
-import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import CircleIcon from '../components/CircleIcon'
 
 const Cards = ({some}) => {
 
-   const {name, status, image, species, location, episode} = some
+   const {name, status, image, species, location} = some
    let getColor = ''
     
-    useEffect(()=>{
-        const bringEpisode = async () => {
-           try {
-                const urlEpisode = await episode
-                const episodeName = await axios(urlEpisode)
-                console.log(await episodeName)
-           } catch (error) {
-               console.log(error)
-           }
-        }
-        bringEpisode()
-    },[episode])
-
     switch(status){
         case 'Alive':
             getColor ='green.500'
@@ -36,8 +22,18 @@ const Cards = ({some}) => {
         break
     }
 
+    const [activeFade, setActiveFade] = useState(false)
+
+   useEffect(() => {
+    if(some?.image){
+        setTimeout(() => {
+            setActiveFade(true)
+        }, 300);
+    }
+   }, [some.image])
+
     return (
-            <Box borderRadius='lg' overflow='hidden' className='bg-zinc-600' display='flex'>
+            <Box borderRadius='lg' overflow='hidden' shadow='md' className={`bg-zinc-600 md:flex -translate-x-20 hover:scale-110 cursor-pointer ${activeFade ? 'opacity-100 duration-700 transition-all -translate-x-0' : 'opacity-0'}`}>
                 <Image 
                     src={image}
                     alt={image}
@@ -48,7 +44,7 @@ const Cards = ({some}) => {
                         mt='1'
                         fontWeight='bold'
                         lineHeight='8'
-                        className={`text-zinc-50 ${name.length < 15 ? 'text-4xl' : 'text-2xl'} hover:text-orange-500 cursor-pointer`}
+                        className={`text-zinc-50 ${name.length < 15 ? 'text-4xl' : 'text-2xl'} hover:text-orange-500`}
                     >
                             {name}
                     </Box>

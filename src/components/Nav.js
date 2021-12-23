@@ -8,6 +8,9 @@ const Nav = () => {
         console.log('Hola')
     }
 
+    // TODO etter design
+    // TODO Searching for Characters
+
     return (
         <Box className='bg-zinc-600'>
             <Container maxW='container.xl' display="flex" alignItems="center" justifyContent="space-between" px={10} h={24} >
