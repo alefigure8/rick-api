@@ -1,58 +1,82 @@
 import { Spinner, Box } from '@chakra-ui/react'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import {CharacterContext} from '../context/CharacterContext'
 import Cards from '../components/Cards'
+import gsap from 'gsap/all'
 
 const Page = () => {
 
-    const {getCharacters, setCallFetch, setCharacter} = useContext(CharacterContext)
-    const [activeFade, setActiveFade] = useState(false)
+    const {getCharacters, setCallFetch, setCharacters, getCharacter} = useContext(CharacterContext)
+    const [animationSlide, setAnimationSlide] = useState(false)
+    const randomBtn = useRef()
 
-    // transition effect
     useEffect(() => {
-        if(getCharacters.length < 1){
-            setTimeout(() => {
-                setActiveFade(true)
-            }, 1000);
-        }
+        setTimeout(()=>{setAnimationSlide(true)},1200)
     }, [getCharacters])
 
    // random button
    const handleClick = (e) => {
        e.preventDefault()
-        setCallFetch(true) 
-        setCharacter([])
+        setAnimationSlide(false)
+        setCharacters([])
+        setCallFetch(true)
+   }
+
+   // hover random button
+   const enter = () => {
+    gsap.to(randomBtn.current, .5, { rotateY: '360deg'})
+   }
+
+   const leave = () => {
+    gsap.to(randomBtn.current, .5, { rotateY: '0deg'})
    }
 
     return (
-        <div className='px-10 flex justify-center pt-14 pb-14 bg-zinc-500'>
-            <Box>
-                {getCharacters.length < 1 ? 
-                    <div>
+        <div className='px-10 flex justify-center items-center pt-14 pb-5 bg-zinc-700 xl:h-5/6'>
+            <div className='flex flex-col justify-center items-center'>
+                <div className='lg:block lg:absolute grid top-32 swipe'>
+                    <p className='text-zinc-50 text-2xl'>Swipe it! <i className="fas fa-hand-middle-finger text-2xl text-zinc-100"></i></p>
+                </div>
+                <div className='lg:absolute fixed bottom-0 lg:right-14 right-5 z-50'>
+                    <button 
+                    className='bg-zinc-50 text-zinc-800 text-bold w-28 h-28 rounded-full shadow-xl hover:bg-zinc-800 hover:text-zinc-50 mb-10 random'
+                    onClick={handleClick}
+                    data-hover='Pussy!'
+                    ref={randomBtn}
+                    onMouseEnter={enter}
+                    onMouseLeave={leave}
+                    >
+                        Random
+                    </button>
+                </div>
+                <div>
+                    {getCharacters.length < 1 
+                        ? 
                         <Spinner color='orange.500' size="xl" speed='0.65s' thickness='4px'/>  
-                    </div> 
-                    :
-                    <div>
-                        <div className='flex justify-center mb-10'>
-                            <button 
-                            className={`bg-zinc-800 text-zinc-50 text-bold text-2xl p-2 rounded-md shadow-xl hover:bg-orange-500 ${activeFade ? 'opacity-100 transition-all duration-300' : 'opacity-0'}`}
-                            onClick={handleClick}
-                            >Random</button>
-                        </div>
-                        <Box as='div' className='grid lg:grid-cols-3 gap-10'>
-                            {getCharacters.map(some => (
-                                <Cards 
-                                    key={some.name} 
-                                    some={some}
-                                    borderWidth='1px' 
-                                    borderRadius='lg' 
-                                    overflow='hidden' 
-                                />
-                            ))}
-                        </Box>
-                    </div>
+                        :
+                        (
+                            <Box as='div' className='grid lg:grid-cols-2 xl:grid-cols-3 gap-10'>
+                                { getCharacters.length === 1 
+                                    ?
+                                        getCharacter.map(some => (
+                                            <Cards 
+                                                key={some.name} 
+                                                some={some}
+                                                animationSlide={animationSlide}
+                                            /> )) 
+                                    :
+                                    getCharacters.map(some => (
+                                        <Cards 
+                                            key={some.name} 
+                                            some={some}
+                                            animationSlide={animationSlide}
+                                        /> ))
+                                    }
+                            </Box>
+                        )
                     }
-            </Box>
+                </div>
+            </div>
         </div>
     )
 }
