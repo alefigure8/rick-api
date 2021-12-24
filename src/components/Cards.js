@@ -37,7 +37,7 @@ const Cards = ({some, animationSlide }) => {
 
     useEffect(()=> {
         if(animationSlide){
-            gsap.fromTo(cardRef.current, 1, { opacity: 0, translateX: -1000}, {opacity: 1, translateX: 0}) 
+            gsap.fromTo(cardRef.current, 1, { opacity: 0}, {opacity: 1}) 
         }
     }, [animationSlide])
 
@@ -47,7 +47,7 @@ const Cards = ({some, animationSlide }) => {
         return (
              <LeadingActions>
                  <SwipeAction 
-                 onClick={() => console.log('Edit') }
+                 onClick={() => console.log(id) }
                  >
                      Wubba Lubba Dub Dub!
                  </SwipeAction>

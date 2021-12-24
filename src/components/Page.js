@@ -11,7 +11,7 @@ const Page = () => {
     const randomBtn = useRef()
 
     useEffect(() => {
-        setTimeout(()=>{setAnimationSlide(true)},1200)
+        setTimeout(()=>{setAnimationSlide(true)},1500)
     }, [getCharacters])
 
    // random button
@@ -34,9 +34,6 @@ const Page = () => {
     return (
         <div className='px-10 flex justify-center items-center pt-14 pb-5 bg-zinc-700 xl:h-5/6'>
             <div className='flex flex-col justify-center items-center'>
-                <div className='lg:block lg:absolute grid top-32 swipe'>
-                    <p className='text-zinc-50 text-2xl'>Swipe it! <i className="fas fa-hand-middle-finger text-2xl text-zinc-100"></i></p>
-                </div>
                 <div className='lg:absolute fixed bottom-0 lg:right-14 right-5 z-50'>
                     <button 
                     className='bg-zinc-50 text-zinc-800 text-bold w-28 h-28 rounded-full shadow-xl hover:bg-zinc-800 hover:text-zinc-50 mb-10 random'
@@ -56,6 +53,7 @@ const Page = () => {
                         :
                         (
                             <Box as='div' className='grid lg:grid-cols-2 xl:grid-cols-3 gap-10'>
+                                 <p className='text-zinc-100 g:block lg:absolute grid swipe swipe-text'>Swipe it! <i className="fas fa-hand-middle-finger swipe-hand"></i></p>
                                 { getCharacters.length === 1 
                                     ?
                                         getCharacter.map(some => (

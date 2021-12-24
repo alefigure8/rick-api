@@ -18,7 +18,7 @@ code {
 
 /*** SWIPE LIST OVERRIDES **/
 .swipe-action__leading {
-  background-color: #888;
+  background-color: #333;
   color: #fff;
   border-radius: 5px;
   font-size: 1.6rem;
@@ -41,9 +41,11 @@ code {
   text-align: right;
 }
 
+
 .random:hover:after {
   content: attr(data-hover);
-  font-size: 25px;
+  font-size: 36px;
+  font-family: 'Dancing Script', cursive;
 }
 
 .random:hover{
@@ -56,5 +58,51 @@ code {
 }
 
 .swipe{
+  z-index: 1;
+  top: 45%;
+  left: 46%;
   display: none;
+  animation: animate 1s linear infinite;
+}
+
+.swipe-text{
+  font-family: 'Dancing Script', cursive;
+  font-size: 30px;
+}
+
+.swipe-hand{
+  font-size: 42px;
+}
+
+@media screen and (min-width: 960px) {
+  .swipe{
+    display: block;
+  }
+ }
+
+
+@keyframes animate
+{
+  0%
+  {
+    transform: translateX(80px);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  15%
+  {
+    transform: translateX(150px);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100%
+  {
+    transform: translateX(200px);
+    opacity: 0;
+
+  }
+}
+
+.img-footer{
+  filter: invert();
 }
