@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from 'react'
-import {getCharacterData} from '../Configs/configs'
+import {getCharacterData, getCharacterDataName} from '../Configs/configs'
 
 export const CharacterContext = createContext()
 
@@ -8,6 +8,10 @@ const CharacterProvider = ({children}) => {
     const [getCharacter, setCharacter] = useState ([])
     const [callFetch, setCallFetch] = useState (false)
     const [deleteCharacter, setDeleteCharacter] = useState(0)
+    const [searchCharacter,  setSearchCharacter] = useState([])
+    const [namecharacter, setNameCharacter] = useState('')
+    const [callSeacrhFetch, setCallSearchFetch] = useState (false)
+
 
     useEffect( () => {
         const result = async () => {
@@ -29,9 +33,38 @@ const CharacterProvider = ({children}) => {
         result()        
     }, [deleteCharacter])
 
+    useEffect( () => {
+       
+        const result = async () => {
+            if(namecharacter !== ''){
+            // axios
+            setSearchCharacter(await getCharacterDataName(namecharacter))
+            console.log(searchCharacter)
+            if(searchCharacter.length > 0){
+                setCharacters(searchCharacter)
+            }
+            
+        }
+     }     
+
+     result()  
+     setCallSearchFetch(false)
+     setNameCharacter('')
+     setSearchCharacter([])
+      
+    }, [callSeacrhFetch])
+
+
     return (
         <CharacterContext.Provider
-            value={{getCharacters, setCallFetch, setCharacters, getCharacter, setDeleteCharacter}}
+            value={{getCharacters, 
+                    getCharacter, 
+                    setCallFetch, 
+                    setCharacters, 
+                    setDeleteCharacter,
+                    setNameCharacter,
+                    setCallSearchFetch
+            }}
         >
             {children}
         </CharacterContext.Provider>

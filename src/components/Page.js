@@ -3,6 +3,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import {CharacterContext} from '../context/CharacterContext'
 import Cards from '../components/Cards'
 import gsap from 'gsap/all'
+import Swipe from './Swipe'
 
 const Page = () => {
 
@@ -53,7 +54,7 @@ const Page = () => {
                         :
                         (
                             <Box as='div' className='grid lg:grid-cols-2 xl:grid-cols-3 gap-10'>
-                                 <p className='text-zinc-100 g:block lg:absolute grid swipe swipe-text'>Swipe it! <i className="fas fa-hand-middle-finger swipe-hand"></i></p>
+                                <Swipe />
                                 { getCharacters.length === 1 
                                     ?
                                         getCharacter.map(some => (

@@ -16,7 +16,7 @@ const Cards = ({some, animationSlide }) => {
 
    const {name, status, image, species, location, id} = some
    const cardRef = useRef()
-   const {setOneFetch, setDeleteCharacter} = useContext(CharacterContext)
+   const {setDeleteCharacter} = useContext(CharacterContext)
 
 
    let getColor = ''

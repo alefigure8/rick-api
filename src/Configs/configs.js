@@ -21,3 +21,15 @@ function numbers(num) {
     }
     return result.slice(1)
 }
+
+export async function getCharacterDataName (name)  {
+    try {
+        const nameToFind = await name
+        console.log(name)
+        const urlCharacter = await `https://rickandmortyapi.com/api/character?name=${nameToFind}`
+        const characters = await axios(urlCharacter)
+        return characters.data.results.slice(0, 6)
+    } catch (error) {
+        console.log(error)
+    }
+}
