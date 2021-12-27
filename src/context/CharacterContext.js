@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from 'react'
 import {getCharacterData} from '../Configs/configs'
+import { saveLocal } from '../Configs/localStorage'
 
 export const CharacterContext = createContext()
 
@@ -8,31 +9,47 @@ const CharacterProvider = ({children}) => {
     const [getCharacter, setCharacter] = useState ([])
     const [callFetch, setCallFetch] = useState (false)
     const [deleteCharacter, setDeleteCharacter] = useState(0)
+    const [saveCharacters, setSaveCharacters] = useState(JSON.parse(localStorage.getItem('characters')) ?? [])
 
-    useEffect( () => {
+    useEffect(()=>{
         const result = async () => {
-            // axios
             setCharacters(await getCharacterData(6))
             setCallFetch(false)
-            
         }
         result()        
     }, [callFetch])
 
+
     useEffect( () => {
         const result = async () => {
-            // axios
             setCharacter(await getCharacterData(1))
             setCharacters(getCharacters.map(each => each.id === deleteCharacter ? getCharacter : each))
-            
         }
         result()        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleteCharacter])
+
+    useEffect(()=>{
+            const newArray = saveCharacters.reduce((acc, item) => {
+                if(!acc.some(obj => obj.id === item.id)){
+                    acc.push(item)
+               } 
+               return acc
+            },[])
+            saveLocal(newArray)
+    }, [saveCharacters])
+
 
     return (
         <CharacterContext.Provider
-            value={{getCharacters, setCallFetch, setCharacters, getCharacter, setDeleteCharacter}}
+            value={{
+                getCharacters, 
+                getCharacter,
+                saveCharacters,
+                setSaveCharacters,
+                setCallFetch, 
+                setCharacters, 
+                setDeleteCharacter,
+            }}
         >
             {children}
         </CharacterContext.Provider>

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import {CharacterContext} from '../context/CharacterContext'
 import Cards from '../components/Cards'
 import RandomBTN from './RandomBTN'
-import Swipe from './Swipe'
+import SaveStorage from './SaveStorage'
 
 const Page = () => {
 
@@ -29,6 +29,7 @@ const Page = () => {
                         handleClick={handleClick}
                     />
                 </div>
+                <SaveStorage />
                 <div>
                     {getCharacters.length < 1 
                         ? 
@@ -36,7 +37,6 @@ const Page = () => {
                         :
                         (
                             <Box as='div' className='grid lg:grid-cols-2 xl:grid-cols-3 gap-10'>
-                                <Swipe />
                                 { getCharacters.length === 1 
                                     ?
                                         getCharacter.map(some => (

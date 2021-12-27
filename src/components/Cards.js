@@ -16,7 +16,7 @@ const Cards = ({some, animationSlide }) => {
 
    const {name, status, image, species, location, id} = some
    const cardRef = useRef()
-   const {setOneFetch, setDeleteCharacter} = useContext(CharacterContext)
+   const {setDeleteCharacter, setSaveCharacters, saveCharacters} = useContext(CharacterContext)
 
 
    let getColor = ''
@@ -47,7 +47,9 @@ const Cards = ({some, animationSlide }) => {
         return (
              <LeadingActions>
                  <SwipeAction 
-                 onClick={() => console.log(id) }
+                 onClick={() => {
+                     setSaveCharacters([...saveCharacters, some])
+                    }}
                  >
                      Wubba Lubba Dub Dub!
                  </SwipeAction>

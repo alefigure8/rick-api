@@ -68,8 +68,6 @@ code {
  }
 
 .swipe{
-  z-index: 1;
-  left: 36%;
   animation: animate 1s linear infinite;
 }
 
@@ -80,13 +78,10 @@ code {
 
 .swipe-arrow-right{
   font-size: 80px;
-  margin-left: 230px;
 }
 
 .swipe-text{
   font-family: 'Dancing Script', cursive;
-  top:10px;
-  left:42%;
   font-size: 36px;
 }
 
