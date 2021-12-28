@@ -28,7 +28,7 @@ code {
 }
 
 .swipe-action__trailing {
-  background-color: rgb(249 115 22);
+  background-color: #f97316;
   border-radius: 5px;
   color: #fff;
   font-size: 2.4rem;
@@ -134,4 +134,13 @@ code {
 
 .storage:hover{
   opacity:.5;
+}
+
+#chakra-modal-242{
+  background-color: #333;
+  box-shadow: 0 0 15px #000;
+}
+
+.css-a9ouig {
+  background: #333;
 }
