@@ -50,7 +50,7 @@ const Cards = ({some, animationSlide }) => {
                      setSaveCharacters([...saveCharacters, some])
                     }}
                  >
-                     Wubba Lubba Dub Dub!
+                     Save me!
                  </SwipeAction>
             </LeadingActions>
             )

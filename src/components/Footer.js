@@ -13,9 +13,9 @@ const Footer = () => {
             <Container maxW='container.xl' display="flex" alignItems="center" justifyContent="space-between" px={10} h={24} >
                 <div className='flex justify-around w-4/12'>
                     <h3 className='text-zinc-50 text-lg font-bold uppercase'>Alejandro Gomez Nieto</h3>
-                    <img src='/img/twitter.svg' alt='twitter' className='w-9 hover:opacity-50 transition-all duration-300 cursor-pointer'/>
-                    <img src='/img/github.svg' alt='github'className='w-8  hover:opacity-50 transition-all duration-300 cursor-pointer'/>
-                    <img src='/img/linkedin.svg' alt='linkedin'className='w-8 hover:opacity-50 transition-all duration-300 cursor-pointer'/>
+                    <a href='https://twitter.com/alegomeznieto' target='_blank' rel='noreferrer'><img src='/img/twitter.svg' alt='twitter' className='w-9 hover:opacity-50 transition-all duration-300 cursor-pointer'/></a>
+                    <a href='https://github.com/alefigure8' target='_blank' rel='noreferrer'><img src='/img/github.svg' alt='github'className='w-8  hover:opacity-50 transition-all duration-300 cursor-pointer'/></a>
+                    <a href='https://www.linkedin.com/in/alejandro-gomez-nieto-20582487/' target='_blank' rel='noreferrer'><img src='/img/linkedin.svg' alt='linkedin'className='w-8 hover:opacity-50 transition-all duration-300 cursor-pointer'/></a>
                 </div>
                 <div className='flex justify-end w-6/12 items-center'>
                     

@@ -6,28 +6,40 @@ const SaveStorage = () => {
     const [getInfo, setInfo] = useState({})
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    console.log(getInfo)
+
     useEffect(()=>{
-        const storage = JSON.parse(localStorage.getItem('characters'))
-        setstorage(storage)
+        const result = async ()=> {
+            const storage = await JSON.parse(localStorage.getItem('characters'))
+            setstorage(storage)
+        }
+        result()
     },[setstorage])
+
+    function handleDelete(){
+        const deleteInfo = getStorage.filter(info => info.id !== getInfo.id)
+        setstorage(deleteInfo)
+        localStorage.setItem('characters', JSON.stringify(deleteInfo))
+        onClose()
+    }
     return (
         <>
-            {getStorage.length > 0 && 
-                
+            {getStorage.length > 0 
+                ?
                 <div className='flex flex-col py-2 px-2 rounded-md'>
                     <h2 className='text-2xl font-bold text-center m-10 uppercase text-orange-500'>Items saved</h2>
                     { getStorage.map(item => (
-                        <div  className='flex items-center'>
+                        <div  className='flex items-center mb-4'>
                             <img onClick={()=>{
                                     onOpen()
                                     setInfo(item)
                                 }} 
-                                className='w-16 rounded-full storage mb-4' 
+                                className='w-16 rounded-full storage' 
                                 src={item.image} 
                                 key = {item.id} 
                                 alt={item.name}
                             />
-                            <h3 className='font-bold ml-3 text-zinc-100 hover:text-orange-500 cursor-pointer'>{item.name}</h3>
+                            <h3 className='font-bold ml-3 text-zinc-100 hover:text-orange-500 cursor-pointer text-xl'>{item.name}</h3>
                         </div>))
                     }
 
@@ -44,28 +56,37 @@ const SaveStorage = () => {
                                     <img  
                                         src={getInfo.image} 
                                         alt={getInfo.name}
-                                        className='rounded-full w-48'
+                                        className='rounded-full w-56'
                                     />
                                 </div>    
                                 <div className='ml-5 flex flex-col justify-between w-72'>
                                     <div>
-                                        <h3 className='text-3xl font-bold uppercase text-zinc-100 hover:text-orange-500'>{getInfo.name}</h3>
+                                    <a href={getInfo.url} target='_blank' rel='noreferrer'><h3 className='text-3xl font-bold uppercase text-zinc-100 hover:text-orange-500 text-center'>{getInfo.name}</h3></a>
                                         <Box
                                             className='text-zinc-50'
                                             fontSize='lg'
                                             fontWeight='semibold'
-                                            mt='4'
-                                            >
-                                            {getInfo.status} - {getInfo.species}
+                                            my='4'
+                                        >
+                                            <p><span className='text-zinc-400 font-semibold'>Status:</span> {getInfo.status}</p>
+                                            <p><span className='text-zinc-400 font-semibold'>Specie:</span>  {getInfo.species}</p>
+                                            <p><span className='text-zinc-400 font-semibold'>Gender:</span>  {getInfo.gender}</p>
+                                            <p><span className='text-zinc-400 font-semibold'>Seen on:</span>  {getInfo.episode && getInfo.episode.length ? getInfo.episode.length : 'Unkown'} Episodes</p>
+                                            <p><span className='text-zinc-400 font-semibold'>Origin:</span>  {getInfo.origin && getInfo.origin.name ? getInfo.origin.name : 'Unkown'}</p>
+                                            <p><span className='text-zinc-400 font-semibold'>Location:</span>  {getInfo.location && getInfo.location.name ? getInfo.location.name : 'Unkown'}</p>
                                         </Box>
                                     </div>
-                                    <Button mx='auto' width='28' variant='ghost' color='#ddd' bg='#333' _hover={{color:'#333', bg:'#f97316'}}>Delete</Button>
+                                    <Button
+                                        onClick={handleDelete}
+                                        mx='auto' width='28' variant='ghost' color='#ddd' bg='#333' _hover={{color:'#333', bg:'#f97316'}}>Delete</Button>
                                 </div>
                             </div>      
                         </ModalBody>
                     </ModalContent>
                     </Modal>
                 </div>
+                :
+                <h2 className='text-xl font-bold text-center m-10 uppercase text-orange-500'>Save some Characters</h2>
             }
         </>
     )
