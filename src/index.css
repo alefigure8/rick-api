@@ -17,6 +17,7 @@ code {
 }
 
 /*** SWIPE LIST OVERRIDES **/
+
 .swipe-action__leading {
   background-color: #333;
   color: #fff;
@@ -41,6 +42,7 @@ code {
   text-align: right;
 }
 
+/*** RANDOM BUTTON **/
 
 .random:hover:after {
   content: attr(data-hover);
@@ -66,6 +68,8 @@ code {
     display: block;
   }
  }
+
+/*** SWIPE ADVISE **/
 
 .swipe{
   animation: animate 1s linear infinite;
@@ -118,4 +122,16 @@ code {
 }
 .img-footer{
   filter: invert();
+}
+
+
+/*** STORAGE **/
+
+.storage {
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.storage:hover{
+  opacity:.5;
 }

@@ -1,4 +1,4 @@
-import { Spinner, Box } from '@chakra-ui/react'
+import { Spinner, Box, useDisclosure, Button, Collapse } from '@chakra-ui/react'
 import { useContext, useEffect, useState } from 'react'
 import {CharacterContext} from '../context/CharacterContext'
 import Cards from '../components/Cards'
@@ -22,14 +22,13 @@ const Page = () => {
    }
 
     return (
-        <div className='px-10 flex justify-center items-center pt-14 pb-5 bg-zinc-700 xl:h-5/6'>
-            <div className='flex flex-col justify-center items-center'>
+        <div className='px-10 flex items-center  pb-5 bg-zinc-700 xl:h-5/6'>
+            <div className='flex flex-col justify-center items-center pt-14'>
                 <div className='lg:absolute fixed bottom-0 lg:right-14 right-5 z-50'>
                     <RandomBTN
                         handleClick={handleClick}
                     />
                 </div>
-                <SaveStorage />
                 <div>
                     {getCharacters.length < 1 
                         ? 

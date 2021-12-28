@@ -1,4 +1,4 @@
-import { Box, Image} from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 import { useContext, useEffect, useRef } from 'react'
 import CircleIcon from '../components/CircleIcon'
 import { gsap } from "gsap"
@@ -17,7 +17,6 @@ const Cards = ({some, animationSlide }) => {
    const {name, status, image, species, location, id} = some
    const cardRef = useRef()
    const {setDeleteCharacter, setSaveCharacters, saveCharacters} = useContext(CharacterContext)
-
 
    let getColor = ''
     switch(status){
