@@ -14,7 +14,7 @@ import { CharacterContext } from '../context/CharacterContext'
 
 const Cards = ({some, animationSlide }) => {
 
-   const {name, status, image, species, location, id} = some
+   const {name, status, image, species, location, id, episode, gender} = some
    const cardRef = useRef()
    const {setDeleteCharacter, setSaveCharacters, saveCharacters} = useContext(CharacterContext)
 
@@ -112,6 +112,19 @@ const Cards = ({some, animationSlide }) => {
                             fontWeight='semibold'
                             mt='4'
                         >
+                           Gender:
+                        </Box>
+                        <Box
+                            mt='1'
+                            color='gray.100'
+                        >
+                            {gender}
+                        </Box>
+                        <Box
+                            color='gray.400'
+                            fontWeight='semibold'
+                            mt='4'
+                        >
                             Last known location:
                         </Box>
                         <Box
@@ -119,6 +132,19 @@ const Cards = ({some, animationSlide }) => {
                             color='gray.100'
                         >
                             {location.name}
+                        </Box>
+                        <Box
+                            color='gray.400'
+                            fontWeight='semibold'
+                            mt='4'
+                        >
+                            Seen on:
+                        </Box>
+                        <Box
+                            mt='1'
+                            color='gray.100'
+                        >
+                            {episode.length} episodes
                         </Box>
                     </div>
                 </Box> 

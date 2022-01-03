@@ -1,12 +1,12 @@
-import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, useDisclosure } from '@chakra-ui/react'
-import React, { useState, useEffect } from 'react'
+import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, useDisclosure } from '@chakra-ui/react'
+import React, { useState, useEffect, useContext } from 'react'
+import { CharacterContext } from '../context/CharacterContext'
 
 const SaveStorage = () => {
     const [getStorage, setstorage] = useState([])
     const [getInfo, setInfo] = useState({})
     const { isOpen, onOpen, onClose } = useDisclosure()
-
-    console.log(getInfo)
+    const {setSaveCharacters} = useContext(CharacterContext)
 
     useEffect(()=>{
         const result = async ()=> {
@@ -19,7 +19,7 @@ const SaveStorage = () => {
     function handleDelete(){
         const deleteInfo = getStorage.filter(info => info.id !== getInfo.id)
         setstorage(deleteInfo)
-        localStorage.setItem('characters', JSON.stringify(deleteInfo))
+        setSaveCharacters(deleteInfo)
         onClose()
     }
     return (
