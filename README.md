@@ -14,7 +14,7 @@ Random Rick and Morty´s character.
 
 ### Link
 
-[https://rick-and-morty-five-flax.vercel.app/](https://rick-and-morty-five-flax.vercel.app/) 
+[CLICK TO VISIT!](https://rick-and-morty-alegomeznieto.vercel.app/) 
 
 
 
