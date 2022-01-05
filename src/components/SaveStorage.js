@@ -1,48 +1,42 @@
 import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, useDisclosure } from '@chakra-ui/react'
-import React, { useState, useEffect, useContext } from 'react'
-import { CharacterContext } from '../context/CharacterContext'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteLocalStorageCharacter } from '../Redux/actions/characterActions'
 
 const SaveStorage = () => {
-    const [getStorage, setstorage] = useState([])
     const [getInfo, setInfo] = useState({})
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const {setSaveCharacters} = useContext(CharacterContext)
 
-    useEffect(()=>{
-        const result = async ()=> {
-            const storage = await JSON.parse(localStorage.getItem('characters'))
-            setstorage(storage)
-        }
-        result()
-    },[setstorage])
+    const dispatch = useDispatch()
 
     function handleDelete(){
-        const deleteInfo = getStorage.filter(info => info.id !== getInfo.id)
-        setstorage(deleteInfo)
-        setSaveCharacters(deleteInfo)
+        dispatch(deleteLocalStorageCharacter(getInfo.id))
         onClose()
     }
+
+    const storageChracters = useSelector(state => state.localCharacters.characters)
+
     return (
         <>
-            {getStorage.length > 0 
+            {storageChracters.length > 0 
                 ?
                 <div className='flex flex-col py-2 px-2 rounded-md'>
                     <h2 className='text-2xl font-bold text-center m-10 uppercase text-orange-500'>Items saved</h2>
-                    { getStorage.map(item => (
-                        <div  className='flex items-center mb-4'>
-                            <img onClick={()=>{
-                                    onOpen()
-                                    setInfo(item)
-                                }} 
+                    { storageChracters.map(item => (
+                        <div key = {item.id} onClick={()=>{
+                            onOpen()
+                            setInfo(item)
+                        }}  className='flex items-center mb-4'>
+                            <img
                                 className='w-16 rounded-full storage' 
                                 src={item.image} 
-                                key = {item.id} 
                                 alt={item.name}
                             />
                             <h3 className='font-bold ml-3 text-zinc-100 hover:text-orange-500 cursor-pointer text-xl'>{item.name}</h3>
                         </div>))
                     }
 
+                    
                     <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
                     <ModalContent
                         bg='#444'
