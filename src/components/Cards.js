@@ -1,5 +1,5 @@
 import { Box, Image } from '@chakra-ui/react'
-import { useContext, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import CircleIcon from '../components/CircleIcon'
 import { gsap } from "gsap"
 import { 
@@ -10,13 +10,13 @@ import {
     TrailingActions 
 } from 'react-swipeable-list'
 import 'react-swipeable-list/dist/styles.css'
-import { CharacterContext } from '../context/CharacterContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteCharacter, fetchCharacter, localStorageCharacters } from '../Redux/actions/characterActions'
 
 const Cards = ({some, animationSlide }) => {
 
    const {name, status, image, species, location, id, episode, gender} = some
    const cardRef = useRef()
-   const {setDeleteCharacter, setSaveCharacters, saveCharacters} = useContext(CharacterContext)
 
    let getColor = ''
     switch(status){
@@ -40,6 +40,16 @@ const Cards = ({some, animationSlide }) => {
         }
     }, [animationSlide])
 
+        // use selector
+    const allCharacters = useSelector(state => state.allCharacters.characters)
+    const allCharacter = useSelector(state => state.character.characters)
+    const storageChracters = useSelector(state => state.localCharacters.characters)
+    const dispatch = useDispatch()
+       // all characters
+       useEffect(()=>{
+        dispatch(fetchCharacter(1))
+    },[])
+
     
     // edit
     function leadingActions(){
@@ -47,7 +57,7 @@ const Cards = ({some, animationSlide }) => {
              <LeadingActions>
                  <SwipeAction 
                  onClick={() => {
-                     setSaveCharacters([...saveCharacters, some])
+                     dispatch(localStorageCharacters([...storageChracters, some]))
                     }}
                  >
                      Save me!
@@ -62,7 +72,7 @@ const Cards = ({some, animationSlide }) => {
              <TrailingActions>
                  <SwipeAction
                  destructive={true}
-                 onClick={() => setDeleteCharacter(id)}
+                 onClick={() => dispatch(deleteCharacter(id, allCharacters, allCharacter))}
                  >
                       Boom!
                  </SwipeAction>
