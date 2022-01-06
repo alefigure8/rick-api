@@ -17,7 +17,15 @@ export const fetchCharacter = num => async dispatch => {
     dispatch({type: actionTypes.FETCH_CHARACTER, payload: response.data})
 }
 
-
+// search characters
+export const fetchSearchCharacter = name => async dispatch => {
+    try {
+        const response = await characters.get(`/character/?name=${name}`)
+         dispatch({type: actionTypes.SEARCH_CHARACTER, payload: response.data})
+    } catch (error) {
+        dispatch({type: actionTypes.SEARCH_CHARACTER, payload: 'Character not found'})
+    }
+}
 // delete character
 export const deleteCharacter = (id, all, one)  => {
       return {

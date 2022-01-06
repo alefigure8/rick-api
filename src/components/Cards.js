@@ -92,12 +92,13 @@ const Cards = ({some, animationSlide }) => {
                     borderRadius='lg' 
                     overflow='hidden' 
                     shadow='md' 
-                    className='bg-zinc-600 md:flex cursor-pointer opacity-0 w-full' 
+                    className='bg-zinc-600 md:flex flex-1 cursor-pointer w-auto h-full' 
                 >
                     <Image 
                         src={image}
                         alt={image}
                         objectFit='cover'
+                        className='selector'
                     />
                     <div className='p-3'>
                         <Box

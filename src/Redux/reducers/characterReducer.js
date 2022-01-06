@@ -2,20 +2,30 @@ import {actionTypes} from '../constants/actionTypes'
 import {saveLocal} from '../../Configs/localStorage'
 
 const initialState = {
-    characters: []
+    characters: [],
+    error: ''
 }
-
 
 // all characters
 export const charactersReducer = (state = initialState, {type, payload}) => {
     switch (type) {
         case actionTypes.FETCH_CHARACTERS:
-                return {...state, characters: payload}   
+                return {...state, characters: payload,  error: ''}   
+
         case actionTypes.FETCH_ONE_CHARACTER:{
             const {id, all, one} = payload
             const result = all.map(each => each.id === id ? one : each)
-            return {...state, characters: result}
+            return {...state, characters: result,  error: ''}
         }
+
+        case actionTypes.SEARCH_CHARACTER: {
+            if(payload === 'Character not found'){
+                return {...state, characters:[], error: payload}
+            }
+            const newArray = payload.results.slice(0, 6)
+            return {...state, characters: newArray, error: ''} 
+        }
+
         default:
             return state
     }

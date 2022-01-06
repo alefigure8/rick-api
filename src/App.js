@@ -8,7 +8,7 @@ function App() {
   return (
 
     <ChakraProvider>
-        <div className='bg-zinc-500 md:h-screen'>
+        <div className='bg-zinc-500 min-h-screen flex flex-col w-full'>
           <Nav />
           <Page />
           <Footer/>

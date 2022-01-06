@@ -144,3 +144,85 @@ code {
 .css-a9ouig {
   background: #333;
 }
+
+/** Nav Button **/
+
+.navButton {
+  position: fixed;
+  top: 58px;
+  right: 0;
+  z-index: 2;
+}
+
+@media screen and (min-width: 1000px) {
+  .navButton {
+    display: block;
+    position: unset;
+    text-align: right;
+  }
+
+ }
+
+
+ /** Icons **/
+
+ .animate-icon {
+  animation: animate-icon 6s linear infinite;
+ }
+
+ @keyframes animate-icon { 
+   100% { 
+     transform:rotate(360deg); 
+    } 
+  }
+
+  .portal {
+    width: 50px;
+    margin-right: 20px;
+    filter: brightness(10) grayscale() ;
+  }
+
+  /** Footer **/
+
+  .footer{
+    height: 200px;
+  }
+
+  @media screen and (min-width: 960px) {
+    .footer{
+      height: 100px;
+    }
+   }
+  
+
+   /** image **/
+
+   .selector {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/** NavBar **/
+
+.navbar {
+  flex-direction: row;
+}
+
+.form_search{
+  display: none;
+}
+
+@media screen and (min-width: 960px) {
+
+  .navbar {
+    flex-direction: row;
+  }
+
+  .form_search{
+    display: block;
+  }
+
+ }
