@@ -1,4 +1,4 @@
-# RICK AND MORTY API
+# RICK AND MORTY API V 2.0 (with search bar)
 
 Random Rick and Morty´s character. 
 
