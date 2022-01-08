@@ -3,29 +3,37 @@ import {saveLocal} from '../../Configs/localStorage'
 
 const initialState = {
     characters: [],
-    error: ''
+    error: '',
+    all: {}
 }
 
 // all characters
 export const charactersReducer = (state = initialState, {type, payload}) => {
     switch (type) {
+
+        case actionTypes.CLEAN_STATE: {
+            return {...state, characters: [], error: '', all: {}}
+        }
+        
         case actionTypes.FETCH_CHARACTERS:
-                return {...state, characters: payload,  error: ''}   
+                return {characters: payload,  error: '', all: {}}   
 
         case actionTypes.FETCH_ONE_CHARACTER:{
             const {id, all, one} = payload
             const result = all.map(each => each.id === id ? one : each)
-            return {...state, characters: result,  error: ''}
+            return {characters: result,  error: '', all: {}}
         }
 
         case actionTypes.SEARCH_CHARACTER: {
             if(payload === 'Character not found'){
-                return {...state, characters:[], error: payload}
+                return {characters:[], error: payload, all: {}}
             }
-            const newArray = payload.results.slice(0, 6)
-            return {...state, characters: newArray, error: ''} 
+            return {characters: payload.results, error: '', all: {next: payload.info.next, prev: payload.info.prev}} 
         }
 
+        case actionTypes.PAGINATION_CHARACTER: {
+            return {characters: payload.results, error: '', all: {next: payload.info.next, prev: payload.info.prev}} 
+        }
         default:
             return state
     }

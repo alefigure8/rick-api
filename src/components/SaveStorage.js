@@ -40,12 +40,13 @@ const SaveStorage = () => {
                     <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
                     <ModalContent
                         bg='#444'
+                        m='10'
                     >
                         <ModalCloseButton 
                             color='#ccc'
                         />
                         <ModalBody>
-                            <div className='flex justify-center py-4 cursor-pointer'>
+                            <div className='flex-col md:flex-row flex justify-center items-center py-4 cursor-pointer'>
                                 <div className='flex items-center'>
                                     <img  
                                         src={getInfo.image} 

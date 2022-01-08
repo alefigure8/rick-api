@@ -182,6 +182,21 @@ code {
     filter: brightness(10) grayscale() ;
   }
 
+  /** single cards **/
+
+  .single-cards{
+    animation: animate-cards 1.5s linear 
+  }
+
+  @keyframes animate-cards { 
+    0% { 
+      opacity: 0; 
+     }
+    100% {
+      opacity: 1;
+    }
+   }
+
   /** Footer **/
 
   .footer{
@@ -226,3 +241,17 @@ code {
   }
 
  }
+
+ /** Icons **/
+ .rick-api,
+ .icons {
+   display: none;
+ }
+
+ @media screen and (min-width: 1200px) {
+  .rick-api,
+  .icons {
+    display: flex;
+  }
+  }
+ 

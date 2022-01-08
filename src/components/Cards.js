@@ -1,7 +1,6 @@
 import { Box, Image } from '@chakra-ui/react'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import CircleIcon from '../components/CircleIcon'
-import { gsap } from "gsap"
 import { 
     LeadingActions, 
     SwipeableList, 
@@ -13,10 +12,9 @@ import 'react-swipeable-list/dist/styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteCharacter, fetchCharacter, localStorageCharacters } from '../Redux/actions/characterActions'
 
-const Cards = ({some, animationSlide }) => {
+const Cards = ({some }) => {
 
    const {name, status, image, species, location, id, episode, gender} = some
-   const cardRef = useRef()
 
    let getColor = ''
     switch(status){
@@ -34,17 +32,13 @@ const Cards = ({some, animationSlide }) => {
         break
     }
 
-    useEffect(()=> {
-        if(animationSlide){
-            gsap.fromTo(cardRef.current, 1, { opacity: 0}, {opacity: 1}) 
-        }
-    }, [animationSlide])
-
         // use selector
     const allCharacters = useSelector(state => state.allCharacters.characters)
     const allCharacter = useSelector(state => state.character.characters)
     const storageChracters = useSelector(state => state.localCharacters.characters)
+
     const dispatch = useDispatch()
+
        // all characters
        useEffect(()=>{
         dispatch(fetchCharacter(1))
@@ -74,7 +68,7 @@ const Cards = ({some, animationSlide }) => {
                  destructive={true}
                  onClick={() => dispatch(deleteCharacter(id, allCharacters, allCharacter))}
                  >
-                      Boom!
+                      Delete me!
                  </SwipeAction>
              </TrailingActions>
          )
@@ -88,19 +82,20 @@ const Cards = ({some, animationSlide }) => {
                 trailingActions={trailingAction()}
             >
                 <Box 
-                    ref={cardRef} 
                     borderRadius='lg' 
                     overflow='hidden' 
                     shadow='md' 
-                    className='bg-zinc-600 md:flex flex-1 cursor-pointer w-auto h-full' 
+                    className='bg-zinc-600 md:flex flex-1 cursor-pointer single-cards' 
                 >
                     <Image 
                         src={image}
                         alt={image}
                         objectFit='cover'
+                        w='auto'
                         className='selector'
+
                     />
-                    <div className='p-3'>
+                    <div className='p-3 flex flex-col justify-around'>
                         <Box
                             mt='1'
                             fontWeight='bold'
@@ -113,7 +108,7 @@ const Cards = ({some, animationSlide }) => {
                             className='text-zinc-50'
                             fontSize='lg'
                             fontWeight='semibold'
-                            mt='4'
+
                         >   
                         <CircleIcon color={getColor} boxSize={3}/>
                     {' '} {status} - {species}
@@ -121,7 +116,6 @@ const Cards = ({some, animationSlide }) => {
                         <Box
                             color='gray.400'
                             fontWeight='semibold'
-                            mt='4'
                         >
                            Gender:
                         </Box>
@@ -134,7 +128,7 @@ const Cards = ({some, animationSlide }) => {
                         <Box
                             color='gray.400'
                             fontWeight='semibold'
-                            mt='4'
+
                         >
                             Last known location:
                         </Box>
@@ -147,7 +141,7 @@ const Cards = ({some, animationSlide }) => {
                         <Box
                             color='gray.400'
                             fontWeight='semibold'
-                            mt='4'
+
                         >
                             Seen on:
                         </Box>

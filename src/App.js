@@ -6,15 +6,13 @@ import Page from './components/Page'
 
 function App() {
   return (
-
-    <ChakraProvider>
-        <div className='bg-zinc-500 min-h-screen flex flex-col w-full'>
-          <Nav />
-          <Page />
-          <Footer/>
-        </div>
-    </ChakraProvider>
-
+      <ChakraProvider>
+          <div className='bg-zinc-500 min-h-screen flex flex-col w-full'>
+            <Nav />
+            <Page />
+            <Footer/>
+          </div>
+      </ChakraProvider>
   )
 }
 

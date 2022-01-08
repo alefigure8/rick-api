@@ -6,6 +6,7 @@ import { numbers } from '../../Configs/configs'
 export const fetchCharacters = num => async dispatch => {
     const resultNumber =  await numbers(num)
     const response = await characters.get(`/character/${resultNumber}`) 
+    dispatch({type: actionTypes.CLEAN_STATE})
     dispatch({type: actionTypes.FETCH_CHARACTERS, payload: response.data})
 }
 
@@ -26,6 +27,15 @@ export const fetchSearchCharacter = name => async dispatch => {
         dispatch({type: actionTypes.SEARCH_CHARACTER, payload: 'Character not found'})
     }
 }
+
+// pagination
+export const paginationCharacter = url => async dispatch => {
+    const response = await characters.get(`${url}`)
+    dispatch({type: actionTypes.CLEAN_STATE})
+    dispatch({type: actionTypes.PAGINATION_CHARACTER, payload: response.data})
+}
+
+
 // delete character
 export const deleteCharacter = (id, all, one)  => {
       return {
